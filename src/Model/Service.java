@@ -1,7 +1,7 @@
 package Model;
 
 public class Service {
-    enum TypeOfService{
+    public enum TypeOfService{
         ACCOUNT,
         PACKAGE
     }

@@ -7,10 +7,10 @@ public class Ticket {
     private int ticketNumber;
     private Service typeOfService;
 
-    public Ticket(Date dateAndTime, int ticketNumber, Service typeOfService) {
+    public Ticket(Date dateAndTime, int ticketNumber, Service serviceObject) {
         this.dateAndTime = dateAndTime;
         this.ticketNumber = ticketNumber;
-        this.typeOfService = typeOfService;
+        this.typeOfService = serviceObject;
     }
 
     public Date getDateAndTime() {

@@ -1,7 +1,7 @@
 package Model;
 
 public class Counter {
-    enum serviceProvidedByCounter{
+    public enum serviceProvidedByCounter{
         ACCOUNT,
         PACKAGE,
         MIXED
