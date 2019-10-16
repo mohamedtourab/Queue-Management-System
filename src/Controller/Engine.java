@@ -22,20 +22,21 @@ public class Engine implements ControllerInterface {
     }
 
     @Override
-    public int generateTicket(Service.TypeOfService serviceName) {
+    public Ticket generateTicket(Service.TypeOfService serviceName) {
         Service newService = new Service(serviceName);
         int sizeOfQueue;
+        Ticket newTicket;
         if(serviceName.toString().equals("ACCOUNT")){
             sizeOfQueue = accountQueue.size();
-            Ticket newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
             accountQueue.add(newTicket);
         }
         else{
             sizeOfQueue = packageQueue.size();
-            Ticket newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
             packageQueue.add(newTicket);
         }
-        return sizeOfQueue+1;//ticketId number
+        return newTicket;
     }
 //TODO the return of the callNextCustomer is just a ticket I didn't specify which counter is calling this ticket yet
     @Override

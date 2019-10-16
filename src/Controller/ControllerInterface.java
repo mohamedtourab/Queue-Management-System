@@ -6,6 +6,6 @@ import Model.Ticket;
 
 public interface ControllerInterface {
    public void init();
-   public int generateTicket(Service.TypeOfService serviceName);
+   public Ticket generateTicket(Service.TypeOfService serviceName);
    public Ticket callNextCustomer(Counter counter);
 }
