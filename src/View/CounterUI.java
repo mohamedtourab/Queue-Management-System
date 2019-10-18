@@ -52,7 +52,7 @@ public class CounterUI {
         Frame.setContentPane(counterUI.panel);
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.pack();
-        Frame.setSize(500, 400);
+        Frame.setSize(800, 600);
         Frame.setVisible(true);
     }
 
