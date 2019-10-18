@@ -8,6 +8,30 @@ import java.util.Queue;
 
 public class Engine implements ControllerInterface {
 
+    public ArrayList<Counter> getCounters() {
+        return counters;
+    }
+
+    public void setCounters(ArrayList<Counter> counters) {
+        this.counters = counters;
+    }
+
+    public Queue<Ticket> getAccountQueue() {
+        return accountQueue;
+    }
+
+    public void setAccountQueue(Queue<Ticket> accountQueue) {
+        this.accountQueue = accountQueue;
+    }
+
+    public Queue<Ticket> getPackageQueue() {
+        return packageQueue;
+    }
+
+    public void setPackageQueue(Queue<Ticket> packageQueue) {
+        this.packageQueue = packageQueue;
+    }
+
     private ArrayList<Counter> counters = new ArrayList<Counter>();
     private Queue<Ticket> accountQueue;
     private Queue<Ticket> packageQueue;
