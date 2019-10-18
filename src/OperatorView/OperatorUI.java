@@ -6,6 +6,8 @@ import Model.Ticket;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.time.LocalTime;
 
 public class OperatorUI {
     private JPanel panel;
@@ -13,9 +15,13 @@ public class OperatorUI {
     private JLabel Counter1;
     private JLabel Counter2;
     private JLabel Counter3;
+    private JLabel Date_time;
     private JRadioButton RadioButtonCounter1;
     private JRadioButton RadioButtonCounter2;
     private JRadioButton RadioButtonCounter3;
+
+    //private LocalTime myObj = LocalTime.now();
+    private Date date = new Date();
 
     private boolean counter1_available = false;
     private boolean counter2_available = false;
@@ -23,6 +29,7 @@ public class OperatorUI {
 
 
     OperatorUI() {
+        displayTime();
         displayCounters(counter1_available, counter2_available, counter3_available);
         RadioButtonCounter1.addActionListener(new ActionListener() {
             @Override
@@ -95,5 +102,10 @@ public class OperatorUI {
         else{
             Counter3.setVisible(false);
         }
+    }
+
+    private void displayTime() {
+        Date_time.setText(date.toString());
+        //myObj
     }
 }
