@@ -17,6 +17,12 @@ public class CounterUI {
     private JButton accountButton;
     private JPanel panel;
     private JLabel selectServiceLabel;
+    private JLabel Counter1;
+    private JLabel Counter2;
+    private JLabel Counter3;
+    private JRadioButton radioButtonCounter1;
+    private JRadioButton radioButtonCounter2;
+    private JRadioButton radioButtonCounter3;
 
     CounterUI() {
         this.packageButton.addActionListener(new ActionListener() {
@@ -54,5 +60,9 @@ public class CounterUI {
         Service service = new Service(serviceType);
         Date dateAndTime = new Date();
         return new Ticket(dateAndTime, ticketNumber, service);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

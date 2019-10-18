@@ -23,6 +23,7 @@ public class Engine implements ControllerInterface {
 
     @Override
     public Ticket generateTicket(Service.TypeOfService serviceName) {
+        //Add date for ticket
         Service newService = new Service(serviceName);
         int sizeOfQueue;
         Ticket newTicket;
