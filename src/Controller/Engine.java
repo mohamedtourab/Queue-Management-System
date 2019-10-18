@@ -84,7 +84,6 @@ public class Engine implements ControllerInterface {
             else {
                 return packageQueue.remove();
             }
-
         }
     }
 }
