@@ -49,17 +49,19 @@ public class Engine implements ControllerInterface {
     public Ticket generateTicket(Service.TypeOfService serviceName) {
         //Add date for ticket
         Service newService = new Service(serviceName);
-        int sizeOfQueue;
+        int sizeOfQueue = 0;
         Ticket newTicket;
         if(serviceName.toString().equals("ACCOUNT")){
             sizeOfQueue = accountQueue.size();
             newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
             accountQueue.add(newTicket);
+            System.out.println(newTicket);
         }
         else{
-            sizeOfQueue = packageQueue.size();
+            sizeOfQueue = packageQueue.size() ;
             newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
             packageQueue.add(newTicket);
+            System.out.println(newTicket);
         }
         return newTicket;
     }

@@ -40,7 +40,7 @@ public class Ticket {
     public String toString() {
         String typeOfTicket = typeOfService.getServiceType() == Service.TypeOfService.ACCOUNT ? "A" : "P";
         return String.format(
-                "Your ticket number is %s%s \n Date: %s",
+                "Your ticket number is %s%s \n Date: %s\n",
                 typeOfTicket,
                 String.format("%3d", ticketNumber).replace(' ', '0'),
                 dateAndTime
