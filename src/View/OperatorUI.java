@@ -20,9 +20,12 @@ public class OperatorUI {
     private JLabel LabelCounter2;
     private JLabel LabelCounter3;
 
+    /*
     private Counter Counter1;
     private Counter Counter2;
-    private Counter Counter3;
+    private Counter Counter3;*/
+
+    private Queue<Ticket> ticketqueue;
 
     private JLabel Date_time;
 
@@ -34,10 +37,6 @@ public class OperatorUI {
     private JButton Next2;
     private JButton Next3;
 
-    private Engine engine;
-
-    private Queue<Ticket> ticketqueue;
-
     int number = 1;
 
     //private LocalTime myObj = LocalTime.now();
@@ -48,12 +47,14 @@ public class OperatorUI {
     private boolean counter3_available = false;
 
     OperatorUI() {
-        //engine.init(); //should be done by the manager
-        //engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);  // Should be done by customers
-        //engine.generateTicket(Service.TypeOfService.PACKAGE);  // Should be done by customers
-        //engine.generateTicket(Model.Service.TypeOfService.ACCOUNT); // Should be done by customers
+        Engine engine= new Engine();
+        engine.init(); //should be done by the manager
 
-        //ticketqueue = engine.getAccountQueue();
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);  // Should be done by customers
+        engine.generateTicket(Model.Service.TypeOfService.PACKAGE);  // Should be done by customers
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT); // Should be done by customers
+
+        ticketqueue = engine.getAccountQueue();
 
         displayTime();
         displayCounters(counter1_available, counter2_available, counter3_available);
@@ -99,9 +100,13 @@ public class OperatorUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(counter1_available){
-                    //LabelCounter1.setText("Counter 1 : Ticket number "+ engine.callNextCustomer(Counter1).getTicketNumber());
-                    LabelCounter1.setText("Counter 1 : Ticket number " + number);
-                    number += 1;
+                    //engine.getCounters().get(0) Counter 1
+
+                    //LabelCounter1.setText("Counter 1 : Ticket number "+ engine.callNextCustomer(engine.getCounters().get(0)).getTicketNumber());
+                    //LabelCounter1.setText("Counter 1 : Ticket number " + number);
+                    LabelCounter1.setText("Counter 1 : Ticket number " + ticketqueue.element().getTicketNumber());
+                    engine.callNextCustomer(engine.getCounters().get(0));
+                    //number += 1;
                 }
             }
         });
