@@ -104,7 +104,7 @@ public class OperatorUI {
 
                     //LabelCounter1.setText("Counter 1 : Ticket number "+ engine.callNextCustomer(engine.getCounters().get(0)).getTicketNumber());
                     //LabelCounter1.setText("Counter 1 : Ticket number " + number);
-                    LabelCounter1.setText("Counter 1 : Ticket number " + ticketqueue.element().getTicketNumber());
+                    LabelCounter1.setText("Counter 1 : Ticket number " + ticketqueue.element().getTicketNumber());//see ticketing linked list issue
                     engine.callNextCustomer(engine.getCounters().get(0));
                     //number += 1;
                 }
