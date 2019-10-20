@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Model.Counter;
 import Model.Service;
 import Model.Ticket;
 
@@ -46,12 +47,27 @@ class EngineTest{
     @Test
     @DisplayName("Need")
         // Verify that the method call the next customer
-    void callNextCustomer() {
+    void callNextCustomer2() {
 
         //SETUP
-
+        engine.init();
+        //Allow me to initialize the 3 counters;
+        Ticket ticketOneA= engine.generateTicket(ACCOUNT);
+        Ticket ticketTwoA=engine.generateTicket(ACCOUNT);
+        Ticket ticketThreeA=engine.generateTicket(ACCOUNT);
+        Ticket ticketOneP=engine.generateTicket(PACKAGE);
+        Ticket ticketTwoP=engine.generateTicket(PACKAGE);
+        Ticket ticketThreeP=engine.generateTicket(PACKAGE);
         //ACTION
+        engine.callNextCustomer(engine.getCounters().get(0));
+        assertEquals(2,engine.getPackageQueue().size());
+        engine.callNextCustomer(engine.getCounters().get(1));
+        assertEquals(2,engine.getAccountQueue().size());
+        engine.callNextCustomer(engine.getCounters().get(2));
+        assertEquals(1,engine.getPackageQueue().size());
 
-        //TEST
+
+
+
     }
 }
