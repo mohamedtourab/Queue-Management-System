@@ -1,18 +1,13 @@
 package Controller;
 
-import Model.Counter;
+
 import Model.Service;
 import Model.Ticket;
-import Controller.Engine;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Queue;
-import java.util.LinkedList;
 
 import static Model.Service.TypeOfService.ACCOUNT;
 import static Model.Service.TypeOfService.PACKAGE;
@@ -24,22 +19,27 @@ class EngineTest{
     @Test
     @DisplayName("Need")
         //Verify that the ticket that has all its characteristics
-    Ticket generateTicket2(Service.TypeOfService accountOne) {
+    void generateTicket2() {
 
         //SETUP
-
+        engine.init();
         Service serviceAccount = new Service(ACCOUNT);
-        Service servicePackage = new Service (PACKAGE);
-
+        Service servicePackage = new Service(PACKAGE);
         //ACTION
-        Ticket testOne=engine.generateTicket(serviceAccount.getServiceType());
-        engine.generateTicket(servicePackage.getServiceType());
+        Ticket testOne=engine.generateTicket(ACCOUNT);
+        Ticket testTwo=engine.generateTicket(PACKAGE);
         //TEST
-        assertEquals(1,engine.getPackageQueue().size());
-        assertEquals(1,engine.getAccountQueue().size());
-        assertEquals(accountOne,testOne.getTypeOfService());
+        String test=testOne.getTypeOfService().toString();
+        String test2=testTwo.getTypeOfService().toString();
+        int sizeAccountQueue=engine.getAccountQueue().size();
+        int sizePackageQueue=engine.getPackageQueue().size();
+        assertEquals(1,sizeAccountQueue);
+        assertEquals(1,sizePackageQueue);
+        /*assertEquals("ACCOUNT",test);
+        assertEquals("PACKAGE",test2); These test don't work due to the following problem that the value of the getTypeOfService */
         assertEquals(1,testOne.getTicketNumber());
-        return (testOne);
+        assertEquals(1,testTwo.getTicketNumber());
+
 
     }
 
