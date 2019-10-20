@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.OperatorUI">
-  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="7" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="532" height="206"/>
+      <xy x="20" y="20" width="498" height="231"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <component id="ec97b" class="javax.swing.JRadioButton" binding="RadioButtonCounter1">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="288" height="19"/>
           </grid>
         </constraints>
@@ -21,7 +21,7 @@
       </component>
       <component id="4ea6c" class="javax.swing.JRadioButton" binding="RadioButtonCounter3">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Counter3 is available"/>
@@ -29,7 +29,7 @@
       </component>
       <component id="f3f89" class="javax.swing.JLabel" binding="LabelCounter1">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="208" height="16"/>
           </grid>
         </constraints>
@@ -39,7 +39,7 @@
       </component>
       <component id="e0e0e" class="javax.swing.JLabel" binding="Date_time">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Date and time"/>
@@ -47,7 +47,7 @@
       </component>
       <component id="15db" class="javax.swing.JLabel" binding="LabelCounter2">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="208" height="16"/>
           </grid>
         </constraints>
@@ -57,7 +57,7 @@
       </component>
       <component id="d2ca5" class="javax.swing.JLabel" binding="LabelCounter3">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="208" height="16"/>
           </grid>
         </constraints>
@@ -67,7 +67,7 @@
       </component>
       <component id="16fbc" class="javax.swing.JButton" binding="Next3">
         <constraints>
-          <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="NEXT 3"/>
@@ -75,7 +75,7 @@
       </component>
       <component id="972e0" class="javax.swing.JButton" binding="Next2">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="208" height="30"/>
           </grid>
         </constraints>
@@ -85,7 +85,7 @@
       </component>
       <component id="1bbe7" class="javax.swing.JButton" binding="Next1">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="288" height="30"/>
           </grid>
         </constraints>
@@ -108,12 +108,28 @@
       </component>
       <component id="f24ab" class="javax.swing.JRadioButton" binding="RadioButtonCounter2">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="208" height="19"/>
           </grid>
         </constraints>
         <properties>
           <text value="Counter2 is available"/>
+        </properties>
+      </component>
+      <component id="2ea93" class="javax.swing.JLabel" binding="LabelWaitAccount">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="people waiting : "/>
+        </properties>
+      </component>
+      <component id="6b207" class="javax.swing.JLabel" binding="LabelWaitPackage">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="people waiting : "/>
         </properties>
       </component>
     </children>

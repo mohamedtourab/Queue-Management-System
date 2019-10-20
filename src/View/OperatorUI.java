@@ -20,12 +20,8 @@ public class OperatorUI {
     private JLabel LabelCounter2;
     private JLabel LabelCounter3;
 
-    /*
-    private Counter Counter1;
-    private Counter Counter2;
-    private Counter Counter3;*/
-
-    private Queue<Ticket> ticketqueue;
+    private JLabel LabelWaitAccount;
+    private JLabel LabelWaitPackage;
 
     private JLabel Date_time;
 
@@ -36,8 +32,6 @@ public class OperatorUI {
     private JButton Next1;
     private JButton Next2;
     private JButton Next3;
-
-    int number = 1;
 
     //private LocalTime myObj = LocalTime.now();
     private Date date = new Date();
@@ -50,11 +44,18 @@ public class OperatorUI {
         Engine engine= new Engine();
         engine.init(); //should be done by the manager
 
-        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);  // Should be done by customers
-        engine.generateTicket(Model.Service.TypeOfService.PACKAGE);  // Should be done by customers
-        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT); // Should be done by customers
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);   // Should be done by customers aka CounterUI
+        engine.generateTicket(Model.Service.TypeOfService.PACKAGE);   // Should be done by customers
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);   // Should be done by customers
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);   //should implement a while loop to get the new clients while using the GUI
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);
+        engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);
+        engine.generateTicket(Model.Service.TypeOfService.PACKAGE);
+        engine.generateTicket(Model.Service.TypeOfService.PACKAGE);
 
-        ticketqueue = engine.getAccountQueue();
+        //LabelWaitMixed.setText();
+        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
+        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
 
         displayTime();
         displayCounters(counter1_available, counter2_available, counter3_available);
@@ -96,38 +97,72 @@ public class OperatorUI {
                 displayCounters(counter1_available, counter2_available, counter3_available);
             }
         });
-        Next1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(counter1_available){
-                    //engine.getCounters().get(0) Counter 1
+        if(engine.getAccountQueue().size() + engine.getPackageQueue().size() > 1) {
+            Next1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (counter1_available) {
+                        engine.callNextCustomer(engine.getCounters().get(0));
+                        LabelCounter1.setText("Counter 1 : Ticket number " + selectTicket(engine, 0));
 
-                    //LabelCounter1.setText("Counter 1 : Ticket number "+ engine.callNextCustomer(engine.getCounters().get(0)).getTicketNumber());
-                    //LabelCounter1.setText("Counter 1 : Ticket number " + number);
-                    LabelCounter1.setText("Counter 1 : Ticket number " + ticketqueue.element().getTicketNumber());//see ticketing linked list issue
-                    engine.callNextCustomer(engine.getCounters().get(0));
-                    //number += 1;
+                        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
+                        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
+                    }
                 }
-            }
-        });
-        Next2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(counter2_available) {
-                    LabelCounter2.setText("Counter 2 : Ticket number " + number);
-                    number += 1;
+            });
+            Next2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (counter2_available) {
+                        engine.callNextCustomer(engine.getCounters().get(1));
+                        LabelCounter2.setText("Counter 2 : Ticket number " + selectTicket(engine, 1));
+
+                        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
+                        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
+                    }
                 }
-            }
-        });
-        Next3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(counter3_available) {
-                    LabelCounter3.setText("Counter 3 : Ticket number " + number);
-                    number += 1;
+            });
+            Next3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (counter3_available) {
+                        engine.callNextCustomer(engine.getCounters().get(2));
+                        LabelCounter3.setText("Counter 3 : Ticket number " + selectTicket(engine, 2));
+
+                        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
+                        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
+                    }
                 }
-            }
-        });
+            });
+        }
+        //CASE NO CUSTOMER LEFT
+        else{
+            Next1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    LabelCounter1.setText("NO CUSTOMER LEFT");
+                    LabelCounter2.setText("NO CUSTOMER LEFT");
+                    LabelCounter3.setText("NO CUSTOMER LEFT");
+                }
+            });
+            Next2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    LabelCounter1.setText("NO CUSTOMER LEFT");
+                    LabelCounter2.setText("NO CUSTOMER LEFT");
+                    LabelCounter3.setText("NO CUSTOMER LEFT");
+
+                }
+            });
+            Next3.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    LabelCounter1.setText("NO CUSTOMER LEFT");
+                    LabelCounter2.setText("NO CUSTOMER LEFT");
+                    LabelCounter3.setText("NO CUSTOMER LEFT");
+                }
+            });
+        }
     }
 
     public static void main(String[] args) {
@@ -141,6 +176,7 @@ public class OperatorUI {
     }
 
 
+    //display the counter whether it is available or not
     private void displayCounters(boolean counter1_available, boolean counter2_available, boolean counter3_available) {
         if(counter1_available){
             LabelCounter1.setVisible(true);
@@ -164,7 +200,26 @@ public class OperatorUI {
         }
     }
 
+    //display time
     private void displayTime() {
         Date_time.setText(date.toString());
+    }
+
+    //select the good counter according to the ticket of the customer
+    private Ticket selectTicket(Engine engine, int number_counter){
+        if(engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.PACKAGE){
+            return engine.getPackageQueue().element();
+        }
+        if(engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.MIXED){
+            if(engine.getAccountQueue().size() > engine.getPackageQueue().size()){
+                return engine.getAccountQueue().element();
+            }
+            else{
+                return engine.getPackageQueue().element();
+            }
+        }
+        else{
+            return engine.getAccountQueue().element();
+        }
     }
 }
