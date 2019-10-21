@@ -18,8 +18,8 @@ public class CallScreenGUI {
     }
 
     public void refresh(Ticket ticket,int counterID){
-        String ticketNumber = ticket.getTypeOfService().toString().charAt(0)+String.valueOf(ticket.getTicketNumber());
-        System.out.println(ticket.getTypeOfService().toString());
+        String ticketNumber = ticket.getTypeOfService().getServiceType().toString().charAt(0)+String.valueOf(ticket.getTicketNumber());
+
         text.setText("\nTicket Number\n" +
                 "          " +  ticketNumber + "\nPlease Proceed To\n" +
                 "    Counter  " + counterID + "\n");
