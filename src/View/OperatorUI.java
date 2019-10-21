@@ -40,7 +40,7 @@ public class OperatorUI {
         frame1.setVisible(true);
         Engine engine = Engine.getEngineInstance();
         CallScreenGUI callScreenGUI = new CallScreenGUI();
-        engine.init(); //should be done by the manager
+        engine.init();
 
         Next1.addActionListener(e -> {
             try {
@@ -67,27 +67,6 @@ public class OperatorUI {
                 JOptionPane.showMessageDialog(null,"No customers to serve");
             }
         });
-    }
-
-    //display the counter whether it is available or not
-    private void displayCounters(boolean counter1_available, boolean counter2_available, boolean counter3_available) {
-        if (counter1_available) {
-            LabelCounter1.setVisible(true);
-        } else {
-            LabelCounter1.setVisible(false);
-        }
-
-        if (counter2_available) {
-            LabelCounter2.setVisible(true);
-        } else {
-            LabelCounter2.setVisible(false);
-        }
-
-        if (counter3_available) {
-            LabelCounter3.setVisible(true);
-        } else {
-            LabelCounter3.setVisible(false);
-        }
     }
 
     //display time

@@ -57,6 +57,10 @@ public class Engine implements ControllerInterface {
         packageQueue = new LinkedList<>();
     }
 
+    /*There is a bug here
+    * the ticket number is assigned based on the queue size which means we can have two customers with the same number
+    * because the size of the queue changes everytime a customer is called
+    * */
     @Override
     public Ticket generateTicket(Service.TypeOfService serviceName) {
         //Add date for ticket
@@ -81,17 +85,6 @@ public class Engine implements ControllerInterface {
     @Override
     public Ticket callNextCustomer(Counter counter) {
         int counterId =counter.getCounterId();
-/*
-        if(counter.getCounterId() == 1){
-            System.out.println("Counter 1 called me");
-        }
-        else if(counter.getCounterId() == 2){
-            System.out.println("Counter 2 called me");
-        }
-        else{
-            System.out.println("Counter 3 called me");
-        }*/
-
         String counterService = counter.getServiceProvided().toString();
 
         if(counterService.equals(accountString)){

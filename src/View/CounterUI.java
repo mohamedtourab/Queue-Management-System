@@ -3,8 +3,6 @@ package View;
 import Controller.Engine;
 import Model.Service;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CounterUI {
 
