@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EngineTest{
 
-    Engine engine = new Engine();
+    Engine engine = Engine.getEngineInstance();
     @Test
     @DisplayName("Need")
         //Verify that the ticket that has all its characteristics

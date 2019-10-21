@@ -29,13 +29,23 @@ public class OperatorUI {
     private boolean counter2_available = false;
     private boolean counter3_available = false;
     private Ticket returnedTicket;
+
     OperatorUI() {
+
+        JFrame frame1 = new JFrame("OPERATOR");
+        frame1.setContentPane(panel);
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame1.pack();
+        frame1.setSize(800, 600);
+        frame1.setVisible(true);
         Engine engine = Engine.getEngineInstance();
+        CallScreenGUI callScreenGUI = new CallScreenGUI();
         engine.init(); //should be done by the manager
 
         Next1.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(0));
+                callScreenGUI.refresh(returnedTicket,1);
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(null,"No customers to serve");
             }
@@ -43,6 +53,8 @@ public class OperatorUI {
         Next2.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(1));
+                callScreenGUI.refresh(returnedTicket,2);
+
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(null,"No customers to serve");
             }
@@ -50,20 +62,12 @@ public class OperatorUI {
         Next3.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(2));
+                callScreenGUI.refresh(returnedTicket,3);
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(null,"No customers to serve");
             }
         });
     }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
 
     //display the counter whether it is available or not
     private void displayCounters(boolean counter1_available, boolean counter2_available, boolean counter3_available) {
