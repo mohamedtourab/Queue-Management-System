@@ -59,10 +59,6 @@ public class Engine implements ControllerInterface {
         packageQueue = new LinkedList<>();
     }
 
-    /*There is a bug here
-    * the ticket number is assigned based on the queue size which means we can have two customers with the same number
-    * because the size of the queue changes everytime a customer is called
-    * */
     @Override
     public Ticket generateTicket(Service.TypeOfService serviceName) {
         //Add date for ticket
