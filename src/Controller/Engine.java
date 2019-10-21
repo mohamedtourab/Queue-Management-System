@@ -7,6 +7,20 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Engine implements ControllerInterface {
+    final static String accountString = "ACCOUNT";
+    final static String packageString = "PACKAGE";
+    static int accountIndex = 0;
+    static int packageIndex = 0;
+// Implementing singleton Engine
+    private static Engine engine;
+    public static Engine getEngineInstance(){
+        if(engine == null){
+            engine = new Engine();
+        }
+        return engine;
+    }
+    private Engine() {
+    }
 
     public ArrayList<Counter> getCounters() {
         return counters;
@@ -38,8 +52,8 @@ public class Engine implements ControllerInterface {
 
     @Override
     public void init() {
-        counters.add(new Counter(Counter.serviceProvidedByCounter.PACKAGE,1));
-        counters.add(new Counter(Counter.serviceProvidedByCounter.ACCOUNT,2));
+        counters.add(new Counter(Counter.serviceProvidedByCounter.ACCOUNT,1));
+        counters.add(new Counter(Counter.serviceProvidedByCounter.PACKAGE,2));
         counters.add(new Counter(Counter.serviceProvidedByCounter.MIXED,3));
         accountQueue = new LinkedList<>();
         packageQueue = new LinkedList<>();
@@ -49,17 +63,14 @@ public class Engine implements ControllerInterface {
     public Ticket generateTicket(Service.TypeOfService serviceName) {
         //Add date for ticket
         Service newService = new Service(serviceName);
-        int sizeOfQueue = 0;
         Ticket newTicket;
-        if(serviceName.toString().equals("ACCOUNT")){
-            sizeOfQueue = accountQueue.size();
-            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+        if(serviceName.toString().equals(accountString)){
+            newTicket = new Ticket(new Date(),++accountIndex,newService);
             accountQueue.add(newTicket);
             System.out.println(newTicket);
         }
         else{
-            sizeOfQueue = packageQueue.size() ;
-            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+            newTicket = new Ticket(new Date(),++packageIndex,newService);
             packageQueue.add(newTicket);
             System.out.println(newTicket);
         }
@@ -69,22 +80,38 @@ public class Engine implements ControllerInterface {
     @Override
     public Ticket callNextCustomer(Counter counter) {
         int counterId =counter.getCounterId();
-        final String accountString = "ACCOUNT";
-
         String counterService = counter.getServiceProvided().toString();
 
-        if(counterService.equals("ACCOUNT")){
-            return accountQueue.remove();
+        if(counterService.equals(accountString)){
+            if(accountQueue.size()>0 && accountQueue != null){
+                return accountQueue.remove();
+            }else{
+                throw new RuntimeException();
+            }
+
         }
-        else if(counterService.equals("PACKAGE")){
-            return packageQueue.remove();
+        else if(counterService.equals(packageString)){
+            if(packageQueue.size()>0 && packageQueue != null){
+                return packageQueue.remove();
+            }else{
+                throw new RuntimeException();
+            }
+
         }
         else{ //MIXED service counter
             if(accountQueue.size()>packageQueue.size()){
-                return accountQueue.remove();
+                if(accountQueue.size()>0 && accountQueue != null){
+                    return accountQueue.remove();
+                }else{
+                    throw new RuntimeException();
+                }
             }
             else {
-                return packageQueue.remove();
+                if(packageQueue.size()>0 && packageQueue != null){
+                    return packageQueue.remove();
+                }else{
+                    throw new RuntimeException();
+                }
             }
         }
     }

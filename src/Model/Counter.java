@@ -26,7 +26,8 @@ public class Counter {
         return currentTicket;
     }
 
-    public void setCurrentTicket(Ticket currentTicket) { this.currentTicket = currentTicket;
+    public void setCurrentTicket(Ticket currentTicket) {
+        this.currentTicket = currentTicket;
     }
 
     public int getCounterId() {
