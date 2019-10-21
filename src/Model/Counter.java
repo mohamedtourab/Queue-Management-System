@@ -1,11 +1,12 @@
 package Model;
 
 public class Counter {
-    public enum serviceProvidedByCounter{
+    public enum serviceProvidedByCounter {
         ACCOUNT,
         PACKAGE,
         MIXED
     }
+
     private serviceProvidedByCounter serviceProvided;
     private Ticket currentTicket;
     private int counterId;
@@ -14,6 +15,7 @@ public class Counter {
         this.serviceProvided = serviceProvided;
         this.counterId = counterId;
     }
+
     public serviceProvidedByCounter getServiceProvided() {
         return serviceProvided;
     }

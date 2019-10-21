@@ -1,4 +1,5 @@
 package Controller;
+
 import Model.*;
 
 import java.util.ArrayList;
@@ -11,14 +12,16 @@ public class Engine implements ControllerInterface {
     final static String packageString = "PACKAGE";
     static int accountIndex = 0;
     static int packageIndex = 0;
-// Implementing singleton Engine
+    // Implementing singleton Engine
     private static Engine engine;
-    public static Engine getEngineInstance(){
-        if(engine == null){
+
+    public static Engine getEngineInstance() {
+        if (engine == null) {
             engine = new Engine();
         }
         return engine;
     }
+
     private Engine() {
     }
 
@@ -52,9 +55,9 @@ public class Engine implements ControllerInterface {
 
     @Override
     public void init() {
-        counters.add(new Counter(Counter.serviceProvidedByCounter.ACCOUNT,1));
-        counters.add(new Counter(Counter.serviceProvidedByCounter.PACKAGE,2));
-        counters.add(new Counter(Counter.serviceProvidedByCounter.MIXED,3));
+        counters.add(new Counter(Counter.serviceProvidedByCounter.ACCOUNT, 1));
+        counters.add(new Counter(Counter.serviceProvidedByCounter.PACKAGE, 2));
+        counters.add(new Counter(Counter.serviceProvidedByCounter.MIXED, 3));
         accountQueue = new LinkedList<>();
         packageQueue = new LinkedList<>();
     }
@@ -64,52 +67,49 @@ public class Engine implements ControllerInterface {
         //Add date for ticket
         Service newService = new Service(serviceName);
         Ticket newTicket;
-        if(serviceName.toString().equals(accountString)){
-            newTicket = new Ticket(new Date(),++accountIndex,newService);
+        if (serviceName.toString().equals(accountString)) {
+            newTicket = new Ticket(new Date(), ++accountIndex, newService);
             accountQueue.add(newTicket);
             System.out.println(newTicket);
-        }
-        else{
-            newTicket = new Ticket(new Date(),++packageIndex,newService);
+        } else {
+            newTicket = new Ticket(new Date(), ++packageIndex, newService);
             packageQueue.add(newTicket);
             System.out.println(newTicket);
         }
         return newTicket;
     }
-//TODO the return of the callNextCustomer is just a ticket I didn't specify which counter is calling this ticket yet
+
+    //TODO the return of the callNextCustomer is just a ticket I didn't specify which counter is calling this ticket yet
     @Override
     public Ticket callNextCustomer(Counter counter) {
-        int counterId =counter.getCounterId();
+        int counterId = counter.getCounterId();
         String counterService = counter.getServiceProvided().toString();
 
-        if(counterService.equals(accountString)){
-            if(accountQueue.size()>0 && accountQueue != null){
+        if (counterService.equals(accountString)) {
+            if (accountQueue.size() > 0 && accountQueue != null) {
                 return accountQueue.remove();
-            }else{
+            } else {
                 throw new RuntimeException();
             }
 
-        }
-        else if(counterService.equals(packageString)){
-            if(packageQueue.size()>0 && packageQueue != null){
+        } else if (counterService.equals(packageString)) {
+            if (packageQueue.size() > 0 && packageQueue != null) {
                 return packageQueue.remove();
-            }else{
+            } else {
                 throw new RuntimeException();
             }
 
-        }
-        else{ //MIXED service counter
-            if(accountQueue.size()>packageQueue.size()){
-                if(accountQueue.size()>0 && accountQueue != null){
+        } else { //MIXED service counter
+            if (accountQueue.size() > packageQueue.size()) {
+                if (accountQueue.size() > 0 && accountQueue != null) {
                     return accountQueue.remove();
-                }else{
+                } else {
                     throw new RuntimeException();
                 }
-            }
-            else {
-                if(packageQueue.size()>0 && packageQueue != null){
+            } else {
+                if (packageQueue.size() > 0 && packageQueue != null) {
                     return packageQueue.remove();
-                }else{
+                } else {
                     throw new RuntimeException();
                 }
             }
