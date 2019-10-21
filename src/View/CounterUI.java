@@ -14,13 +14,21 @@ public class CounterUI {
     //private int accountCounter = 1;
     //private int packageCounter = 1;
 
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
     private JButton packageButton;
     private JButton accountButton;
     private JPanel panel;
     private JLabel selectServiceLabel;
 
     CounterUI() {
-        Engine engine = new Engine();
+        Engine engine = Engine.getEngineInstance();
         engine.init();
         this.packageButton.addActionListener(new ActionListener() {
             @Override
@@ -45,6 +53,7 @@ public class CounterUI {
         });
     }
 
+/*
     public static void main(String[] args) {
         CounterUI counterUI = new CounterUI();
         JFrame Frame = new JFrame("POST OFFICE");
@@ -54,6 +63,7 @@ public class CounterUI {
         Frame.setSize(800, 600);
         Frame.setVisible(true);
     }
+*/
 
     /*private Ticket createNewTicket(Service.TypeOfService serviceType, int ticketNumber) {
         Service service = new Service(serviceType);

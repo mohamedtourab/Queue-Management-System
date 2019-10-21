@@ -13,7 +13,7 @@ public class StatisticsGUI {
     public int Queue = 0;
 
     public StatisticsGUI() {
-        Engine engine = new Engine();
+        Engine engine = Engine.getEngineInstance();
         engine.init();
         accountsButton.addActionListener(new ActionListener() {
             @Override
