@@ -41,7 +41,7 @@ public class OperatorUI {
     private boolean counter3_available = false;
 
     OperatorUI() {
-        Engine engine= new Engine();
+        Engine engine = new Engine();
         engine.init(); //should be done by the manager
 
         engine.generateTicket(Model.Service.TypeOfService.ACCOUNT);   // Should be done by customers aka CounterUI
@@ -62,10 +62,9 @@ public class OperatorUI {
         RadioButtonCounter1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(counter1_available){
+                if (counter1_available) {
                     counter1_available = false;
-                }
-                else{
+                } else {
                     counter1_available = true;
                 }
                 displayCounters(counter1_available, counter2_available, counter3_available);
@@ -75,10 +74,9 @@ public class OperatorUI {
         RadioButtonCounter2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(counter2_available){
+                if (counter2_available) {
                     counter2_available = false;
-                }
-                else{
+                } else {
                     counter2_available = true;
                 }
                 displayCounters(counter1_available, counter2_available, counter3_available);
@@ -88,81 +86,68 @@ public class OperatorUI {
         RadioButtonCounter3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if(counter3_available){
+                if (counter3_available) {
                     counter3_available = false;
-                }
-                else{
+                } else {
                     counter3_available = true;
                 }
                 displayCounters(counter1_available, counter2_available, counter3_available);
             }
         });
-        if(engine.getAccountQueue().size() + engine.getPackageQueue().size() > 1) {
-            Next1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (counter1_available) {
+
+        Next1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (counter1_available) {
+                    //service provided
+                    if (selectCounterSize(engine,0) != 0) {
+
+                        LabelCounter1.setText("Counter 1 : Ticket number " + selectTicket(engine, 0).toString().substring(22, 26));
+
+                        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
+                        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
                         engine.callNextCustomer(engine.getCounters().get(0));
-                        LabelCounter1.setText("Counter 1 : Ticket number " + selectTicket(engine, 0));
+                    }
+                    else{
+                        LabelCounter1.setText("NO CUSTOMER LEFT");
+                    }
+                }
+            }
+        });
+        Next2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (counter2_available) {
+                    if (selectCounterSize(engine,1) != 0) {
+                        LabelCounter2.setText("Counter 2 : Ticket number " + selectTicket(engine, 1).toString().substring(22, 26));
 
                         LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
                         LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
-                    }
-                }
-            });
-            Next2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (counter2_available) {
                         engine.callNextCustomer(engine.getCounters().get(1));
-                        LabelCounter2.setText("Counter 2 : Ticket number " + selectTicket(engine, 1));
+                    }
+                    else{
+                        LabelCounter2.setText("NOT TODAY");
+                    }
+                }
+            }
+        });
+        Next3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (counter3_available) {
+                    if (selectCounterSize(engine,2) != 0) {
+                        LabelCounter3.setText("Counter 3 : Ticket number " + selectTicket(engine, 2).toString().substring(22, 26));
 
                         LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
                         LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
-                    }
-                }
-            });
-            Next3.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (counter3_available) {
                         engine.callNextCustomer(engine.getCounters().get(2));
-                        LabelCounter3.setText("Counter 3 : Ticket number " + selectTicket(engine, 2));
-
-                        LabelWaitAccount.setText("People Waiting for an ACCOUNT Service : " + Integer.toString(engine.getAccountQueue().size()));
-                        LabelWaitPackage.setText("People Waiting for an PACKAGE Service : " + Integer.toString(engine.getPackageQueue().size()));
+                    }
+                    else{
+                        LabelCounter3.setText("NOT TODAY");
                     }
                 }
-            });
-        }
-        //CASE NO CUSTOMER LEFT
-        else{
-            Next1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    LabelCounter1.setText("NO CUSTOMER LEFT");
-                    LabelCounter2.setText("NO CUSTOMER LEFT");
-                    LabelCounter3.setText("NO CUSTOMER LEFT");
-                }
-            });
-            Next2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    LabelCounter1.setText("NO CUSTOMER LEFT");
-                    LabelCounter2.setText("NO CUSTOMER LEFT");
-                    LabelCounter3.setText("NO CUSTOMER LEFT");
-
-                }
-            });
-            Next3.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    LabelCounter1.setText("NO CUSTOMER LEFT");
-                    LabelCounter2.setText("NO CUSTOMER LEFT");
-                    LabelCounter3.setText("NO CUSTOMER LEFT");
-                }
-            });
-        }
+            }
+        });
     }
 
     public static void main(String[] args) {
@@ -178,24 +163,21 @@ public class OperatorUI {
 
     //display the counter whether it is available or not
     private void displayCounters(boolean counter1_available, boolean counter2_available, boolean counter3_available) {
-        if(counter1_available){
+        if (counter1_available) {
             LabelCounter1.setVisible(true);
-        }
-        else{
+        } else {
             LabelCounter1.setVisible(false);
         }
 
-        if(counter2_available){
+        if (counter2_available) {
             LabelCounter2.setVisible(true);
-        }
-        else{
+        } else {
             LabelCounter2.setVisible(false);
         }
 
-        if(counter3_available){
+        if (counter3_available) {
             LabelCounter3.setVisible(true);
-        }
-        else{
+        } else {
             LabelCounter3.setVisible(false);
         }
     }
@@ -206,20 +188,32 @@ public class OperatorUI {
     }
 
     //select the good counter according to the ticket of the customer
-    private Ticket selectTicket(Engine engine, int number_counter){
-        if(engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.PACKAGE){
+    private Ticket selectTicket(Engine engine, int number_counter) {
+        if (engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.PACKAGE) {
             return engine.getPackageQueue().element();
         }
-        if(engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.MIXED){
-            if(engine.getAccountQueue().size() > engine.getPackageQueue().size()){
+        if (engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.MIXED) {
+            if (engine.getAccountQueue().size() > engine.getPackageQueue().size()) {
                 return engine.getAccountQueue().element();
-            }
-            else{
+            } else {
                 return engine.getPackageQueue().element();
             }
-        }
-        else{
+        } else {
             return engine.getAccountQueue().element();
         }
+    }
+
+    private int selectCounterSize(Engine engine, int number_counter){
+        int size = 0;
+        if (engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.PACKAGE){
+            size = engine.getPackageQueue().size();
+        }
+        if (engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.ACCOUNT){
+            size = engine.getAccountQueue().size();
+        }
+        if (engine.getCounters().get(number_counter).getServiceProvided() == Counter.serviceProvidedByCounter.MIXED){
+            size = engine.getAccountQueue().size() + engine.getPackageQueue().size();
+        }
+        return size;
     }
 }
