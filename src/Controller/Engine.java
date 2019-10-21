@@ -9,6 +9,8 @@ import java.util.Queue;
 public class Engine implements ControllerInterface {
     final static String accountString = "ACCOUNT";
     final static String packageString = "PACKAGE";
+    static int accountIndex = 0;
+    static int packageIndex = 0;
 // Implementing singleton Engine
     private static Engine engine;
     public static Engine getEngineInstance(){
@@ -65,17 +67,14 @@ public class Engine implements ControllerInterface {
     public Ticket generateTicket(Service.TypeOfService serviceName) {
         //Add date for ticket
         Service newService = new Service(serviceName);
-        int sizeOfQueue = 0;
         Ticket newTicket;
         if(serviceName.toString().equals(accountString)){
-            sizeOfQueue = accountQueue.size();
-            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+            newTicket = new Ticket(new Date(),++accountIndex,newService);
             accountQueue.add(newTicket);
             System.out.println(newTicket);
         }
         else{
-            sizeOfQueue = packageQueue.size() ;
-            newTicket = new Ticket(new Date(),sizeOfQueue+1,newService);
+            newTicket = new Ticket(new Date(),++packageIndex,newService);
             packageQueue.add(newTicket);
             System.out.println(newTicket);
         }

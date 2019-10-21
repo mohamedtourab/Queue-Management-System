@@ -49,7 +49,7 @@ public class OperatorUI {
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(null,"No customers to serve");
             }
-    });
+        });
         Next2.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(1));
