@@ -2,6 +2,7 @@ package View;
 
 import Controller.Engine;
 import Model.Ticket;
+
 import javax.swing.*;
 import java.util.Date;
 
@@ -45,26 +46,26 @@ public class OperatorUI {
         Next1.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(0));
-                callScreenGUI.refresh(returnedTicket,1);
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(null,"No customers to serve");
+                callScreenGUI.refresh(returnedTicket, 1);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No customers to serve");
             }
         });
         Next2.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(1));
-                callScreenGUI.refresh(returnedTicket,2);
+                callScreenGUI.refresh(returnedTicket, 2);
 
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(null,"No customers to serve");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No customers to serve");
             }
         });
         Next3.addActionListener(e -> {
             try {
                 returnedTicket = engine.callNextCustomer(engine.getCounters().get(2));
-                callScreenGUI.refresh(returnedTicket,3);
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(null,"No customers to serve");
+                callScreenGUI.refresh(returnedTicket, 3);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No customers to serve");
             }
         });
     }
