@@ -70,11 +70,9 @@ public class Engine implements ControllerInterface {
         if (serviceName.toString().equals(accountString)) {
             newTicket = new Ticket(new Date(), ++accountIndex, newService);
             accountQueue.add(newTicket);
-            System.out.println(newTicket);
         } else {
             newTicket = new Ticket(new Date(), ++packageIndex, newService);
             packageQueue.add(newTicket);
-            System.out.println(newTicket);
         }
         return newTicket;
     }

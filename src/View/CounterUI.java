@@ -2,6 +2,7 @@ package View;
 
 import Controller.Engine;
 import Model.Service;
+import Model.Ticket;
 
 import javax.swing.*;
 
@@ -19,7 +20,7 @@ public class CounterUI {
     private JButton accountButton;
     private JPanel panel;
     private JLabel selectServiceLabel;
-
+    Ticket ticket;
     CounterUI() {
 
         JFrame frame2 = new JFrame("POST OFFICE");
@@ -31,9 +32,22 @@ public class CounterUI {
 
         Engine engine = Engine.getEngineInstance();
         engine.init();
-        this.packageButton.addActionListener(actionEvent -> engine.generateTicket(Service.TypeOfService.PACKAGE));
+        this.packageButton.addActionListener(actionEvent -> {
+                ticket = engine.generateTicket(Service.TypeOfService.PACKAGE);
+                JOptionPane.showMessageDialog(null,("Ticket Number: "+
+                ticket.getTypeOfService().getServiceType().toString().charAt(0)
+                +ticket.getTicketNumber()
+                +"\nService: "+ticket.getTypeOfService().getServiceType().toString()+"\nDate: "+ticket.getDateAndTime().toString()));
+        });
 
-        this.accountButton.addActionListener(actionEvent -> engine.generateTicket(Service.TypeOfService.ACCOUNT));
+
+        this.accountButton.addActionListener(actionEvent -> {
+            ticket = engine.generateTicket(Service.TypeOfService.ACCOUNT);
+            JOptionPane.showMessageDialog(null,("Ticket Number: "+
+                    ticket.getTypeOfService().getServiceType().toString().charAt(0)
+                    +ticket.getTicketNumber()
+                    +"\nService: "+ticket.getTypeOfService().getServiceType().toString()+"\nDate: "+ticket.getDateAndTime().toString()));
+        });
     }
 
 
