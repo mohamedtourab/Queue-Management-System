@@ -60,9 +60,9 @@ class EngineTest{
         Ticket ticketThreeP=engine.generateTicket(PACKAGE);
         //ACTION
         engine.callNextCustomer(engine.getCounters().get(0));
-        assertEquals(2,engine.getPackageQueue().size());
-        engine.callNextCustomer(engine.getCounters().get(1));
         assertEquals(2,engine.getAccountQueue().size());
+        engine.callNextCustomer(engine.getCounters().get(1));
+        assertEquals(2,engine.getPackageQueue().size());
         engine.callNextCustomer(engine.getCounters().get(2));
         assertEquals(1,engine.getPackageQueue().size());
 
